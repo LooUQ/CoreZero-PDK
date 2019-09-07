@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{0325ec35-6132-4c7d-9d9c-0ca4b6c3da1b}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.Communication.Serial.I2C.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.Communication.Serial.SPI.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.Communication.Serial.UART.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.IO.GPIO_Pin.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.IO.PWM_Pin.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CZSystem.Network.hpp" />
+  </ItemGroup>
+</Project>
