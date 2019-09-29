@@ -1,10 +1,9 @@
 /******************************************************************************
-*	\file CZSystem.Communication.Serial.SPI.hpp
-*
-*	\author		Jensen Miller
+*	\file		CZSystem.Communication.Serial.SPI.h
+*	\author		Jensen Miller	<jensen@loouq.com>
 *	\date		Jan 31, 2018
 *
-*	Copyright (c) 2018 LooUQ Incorporated
+*	Copyright (c) 2018-2019 LooUQ Incorporated
 *
 *	\details	An interface for deriving platform specific
 *		Spi implementations.
@@ -27,10 +26,11 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#ifndef COREZERO_HDK_SPI_H_
-#define COREZERO_HDK_SPI_H_
+#ifndef COREZERO_PDK_SPI_H_
+#define COREZERO_PDK_SPI_H_
 
-#include <CZSystem.IO.GPIO_Pin.hpp>
+#include <CZSystem.Communication.h>
+#include <CZSystem.IO.GPIO_Pin.h>
 
 #include <stdint.h>
 #include <stddef.h>
@@ -57,7 +57,8 @@ namespace CZSystem
 			 *
 			 *	\details Allows for cross-platform implementations of Spi class
 			 */
-			class I_SerialPeripheral		
+			class I_SerialPeripheral
+				: public I_Communicator
 			{
 			//
 			//	Constructors
@@ -66,7 +67,7 @@ namespace CZSystem
 				constexpr I_SerialPeripheral(IO::I_GPIO_Pin* slaveSelectPin, uint32_t clockSpeed = 4000000)
 					: m_slaveSelectPin(slaveSelectPin)
 					, m_clockSpeed(clockSpeed)
-					, m_mode(0)					
+					, m_mode(SpiMode_0)					
 				{}
 
 				virtual ~I_SerialPeripheral()
