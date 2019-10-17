@@ -29,7 +29,7 @@
 #ifndef COREZERO_PDK_COM_H_
 #define COREZERO_PDK_COM_H_
 
-#include <stdint.h>
+#include <stddef.h>
 #include <CoreZero.Event.hpp>
 
 namespace CZSystem

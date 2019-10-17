@@ -26,8 +26,8 @@
 #ifndef CZSYSTEM_NETWORKADAPTER_H_
 #define CZSYSTEM_NETWORKADAPTER_H_
 
-#include <CoreZero.Event.hpp>
-#include <CoreZero.Network.hpp>
+#include <corezero/event.hpp>
+#include <corezero/network/network_def.hpp>
 
 #include <stdint.h>
 #include <stdio.h>
@@ -39,14 +39,15 @@
 constexpr int NETWORK_NO_SSL_SUPPORT = 0x0;
 constexpr int NETWORK_SUPPORTS_SSL = 0x1;
 
-#include <CoreZero.Network.hpp>
+#include <corezero/network/network_def.hpp>
 
 namespace CZSystem
 {	
 	namespace Network
 	{
-		using CoreZero::Network::IPv4_Address;
-		using OnDataReceived = CoreZero::Delegate<void(void*,size_t)>;
+		using corezero::network::IPv4_Address;
+		using corezero::network::PingSummary;
+		using OnDataReceived = corezero::Delegate<void(void*,size_t)>;
 
 		/**
 		 *	\brief Network adapter interface.
@@ -57,8 +58,8 @@ namespace CZSystem
 		//	Methods
 		//
 		public:
-			virtual CoreZero::Network::PingSummary	Ping(const IPv4_Address& ipAddress, unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
-			virtual CoreZero::Network::PingSummary	Ping(const char hostName[], unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
+			virtual PingSummary	Ping(const IPv4_Address& ipAddress, unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
+			virtual PingSummary	Ping(const char hostName[], unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
 
 			virtual IPv4_Address HostByName(const char* hostName) = 0;
 
