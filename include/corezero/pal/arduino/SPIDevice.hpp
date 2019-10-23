@@ -1,8 +1,8 @@
 /******************************************************************************
-*	\file Arduino.SPI.hpp
+*	\file	SPIDevice.hpp
 *
-*	\author		Jensen Miller
-*	\date		Jan 31, 2018
+*	\author	Jensen Miller	<jensen@loouq.com>
+*	\date	Jan 31, 2018
 *
 *	Copyright (c) 2018 LooUQ Incorporated
 *
@@ -30,22 +30,24 @@
 #ifndef ARDUINO_SPI_H_
 #define ARDUINO_SPI_H_
 
-#include "../CZSystem.Communication.Serial.SPI.hpp"
 #include <Arduino.h>
 #include <SPI.h>
 
+#include <corezero/hal/communication/serial.SPI.hpp>
 
-namespace CZSystem
+
+
+namespace czsystem
 {
-	namespace Communication
+	namespace communication
 	{
-		namespace Serial
+		namespace serial
 		{
 			class SerialPeripheral
 				: public I_SerialPeripheral
 			{
 			public:
-				constexpr SerialPeripheral(SPIClass * spiClass, IO::I_GPIO_PIN* slaveSelectPin, uint32_t clockSpeed)
+				constexpr SerialPeripheral(SPIClass * spiClass, IO::I_GPIOPin* slaveSelectPin, uint32_t clockSpeed)
 					: I_SerialPeripheral(slaveSelectPin)
 					, m_spiSettings(SPISettings())
 					, m_spi(nullptr)

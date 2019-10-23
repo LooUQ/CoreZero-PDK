@@ -1,5 +1,5 @@
 /******************************************************************************
-*	\file		CZSystem.Communication.Serial.SPI.h
+*	\file		serial.SPI.hpp
 *	\author		Jensen Miller	<jensen@loouq.com>
 *	\date		Jan 31, 2018
 *
@@ -29,17 +29,17 @@
 #ifndef COREZERO_PDK_SPI_H_
 #define COREZERO_PDK_SPI_H_
 
-#include <CZSystem.Communication.h>
-#include <CZSystem.IO.GPIO_Pin.h>
+#include "communication.hpp"
+#include "../IO/GPIOPin.hpp"
 
 #include <stdint.h>
 #include <stddef.h>
 
-namespace CZSystem
+namespace czsystem
 {
-	namespace Communication
+	namespace communication
 	{
-		namespace Serial
+		namespace serial
 		{
 			/// Spi Mode
 			enum Mode
@@ -64,7 +64,7 @@ namespace CZSystem
 			//	Constructors
 			//
 			public:
-				constexpr I_SerialPeripheral(IO::I_GPIO_Pin* slaveSelectPin, uint32_t clockSpeed = 4000000)
+				constexpr I_SerialPeripheral(io::I_GPIOPin* slaveSelectPin, uint32_t clockSpeed = 4000000)
 					: m_slaveSelectPin(slaveSelectPin)
 					, m_clockSpeed(clockSpeed)
 					, m_mode(SpiMode_0)					
@@ -96,7 +96,7 @@ namespace CZSystem
 
 			protected:
 				virtual Mode GetMode()	const { return m_mode; }
-				IO::I_GPIO_Pin* GetSlaveSelect() { return m_slaveSelectPin; }
+				io::I_GPIOPin* GetSlaveSelect() { return m_slaveSelectPin; }
 				uint32_t	GetClockSpeed() { return m_clockSpeed; }
 
 			//
@@ -104,7 +104,7 @@ namespace CZSystem
 			//
 			protected:
 				///	Chip Select	(CS)
-				IO::I_GPIO_Pin* m_slaveSelectPin;								
+				io::I_GPIOPin* m_slaveSelectPin;								
 
 			private:
 				///	SPI Data mode

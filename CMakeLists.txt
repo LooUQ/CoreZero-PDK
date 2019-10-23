@@ -8,7 +8,7 @@
 cmake_minimum_required(VERSION 3.8)
 
 set(PROJECT_NAME "CoreZero-PDK")
-set(PROJECT_LIB_NAME "czsystem")
+set(PROJECT_LIB_NAME "libczsystem")
 
 
 
@@ -68,3 +68,4 @@ target_include_directories("${PROJECT_LIB_NAME}" PRIVATE "${PROJECT_SOURCE_DIR}/
 
 target_sources("${PROJECT_LIB_NAME}" PUBLIC "${LIB_INCLUDES}")	# include library headers
 target_sources("${PROJECT_LIB_NAME}" PRIVATE "${LIB_SOURCES}")	# include library source code
+target_compile_features("${PROJECT_LIB_NAME}" PUBLIC cxx_std_11)

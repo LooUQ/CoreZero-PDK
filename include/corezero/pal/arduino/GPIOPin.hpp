@@ -29,18 +29,19 @@
 #if defined(ARDUINO)
 #ifndef ARDUINO_GPIO_H_
 #define ARDUINO_GPIO_H_
+#include <Arduino.h>
 
-#include "../CZSystem.IO.GPIO_Pin.hpp"
+#include <corezero/hal/IO/GPIOPin.hpp>
 
-namespace CZSystem
+namespace czsystem
 {
-	namespace IO
+	namespace io
 	{
-		class GPIO_Pin
-			: public I_GPIO_Pin
+		class GPIOPin
+			: public I_GPIOPin
 		{
 		public:
-			constexpr GPIO_Pin(unsigned pinName)
+			constexpr GPIOPin(unsigned pinName)
 				: m_pinName(pinName)
 				, m_opened(false)
 				, m_eventLinker(nullptr)
@@ -64,7 +65,7 @@ namespace CZSystem
 		private:
 			bool m_opened;
 			const unsigned m_pinName;
-			CoreZero::Delegate<void()>* m_eventLinker;
+			corezero::Delegate<void()>* m_eventLinker;
 		};
 	}
 }

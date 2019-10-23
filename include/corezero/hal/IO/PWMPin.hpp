@@ -1,12 +1,12 @@
 /******************************************************************************
-*	\file Arduino.GPIO.hpp
+*	@file		PWM_Pin.hpp
 *
-*	\author		Jensen Miller
-*	\date		Aug 28, 2019
+*	@author		Jensen Miller
+*	@date		Aug 22, 2019
 *
 *	Copyright (c) 2019 LooUQ Incorporated
 *
-*	\details	Arduino adaptation for GPIO functionality.
+*	@details	An interface for deriving platform specific Pwm implementations.
 *
 *	License: The GNU Licence(GNU)
 *
@@ -26,41 +26,38 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#if defined(ARDUINO)
-#ifndef ARDUINO_PWM_H_
-#define ARDUINO_PWM_H_
+#ifndef COREZERO_HDK_PWMPIN_H_
+#define COREZERO_HDK_PWMPIN_H_
 
-#include <CZSystem.IO.PWM_Pin.hpp>
-#include "Arduino.GPIO.hpp"
+#include "GPIOPin.hpp"
 
-namespace CZSystem
+
+
+namespace czsystem
 {
-	namespace IO
+	namespace io
 	{
-		class PWM_Pin
-			: public I_PWM_Pin
+		class I_PWMPin
 		{
 		public:
-			constexpr PWM_Pin(unsigned pinName)
-				: m_pin(pinName)
-			{}
+			constexpr I_PWMPin(unsigned pinNum) {}
+			virtual ~I_PWMPin() {}
 
-			virtual ~PWM_Pin();
-
+			//
+			//	Methods
+			//
 		public:
-			virtual int Open();
-			virtual int Close();
+			virtual int Open() = 0;
+			virtual int Close() = 0;
 
-			virtual int Write(float pwmValue);
-			virtual float Read();
+			virtual int Write(float pwmValue) = 0;
+			virtual float Read() = 0;
 
-			virtual int SetPinMode(DriveMode driveMode);
-			
-		private:
-			GPIO_Pin m_pin;
+			virtual int SetPinMode(DriveMode driveMode) = 0;
 		};
+
 	}
 }
 
-#endif	// !ARDUINO_PWM_H_
-#endif	// ARDUINO
+
+#endif	// !COREZERO_HDK_PWMPIN_H_

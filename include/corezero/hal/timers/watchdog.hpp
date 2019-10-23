@@ -1,12 +1,8 @@
 /******************************************************************************
-*	\file		CZSystem.Communication.Serial.SPI.h
+*	\file		timer.hpp
 *	\author		Jensen Miller	<jensen@loouq.com>
-*	\date		Jan 31, 2018
 *
-*	Copyright (c) 2018-2019 LooUQ Incorporated
-*
-*	\details	An interface for deriving platform specific
-*		Spi implementations.
+*	Copyright (c) 2018 LooUQ Incorporated
 *
 *	License: The GNU Licence(GNU)
 *
@@ -26,29 +22,20 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#ifndef COREZERO_PDK_COM_H_
-#define COREZERO_PDK_COM_H_
+#ifndef CZSYSTEM_WATCHDOG_H__
+#define CZSYSTEM_WATCHDOG_H__
 
-#include <stddef.h>
-#include <CoreZero.Event.hpp>
+#include <corezero/event.hpp>
 
-namespace CZSystem
+namespace czsystem
 {
-	namespace Communication
+	namespace timers
 	{
-		class I_Communicator;
-		using OnDataReceived = CoreZero::Delegate<void(I_Communicator* const)>;
-
-		class I_Communicator
+		class I_WatchdogTimer
 		{
-		public:
-			virtual int Write(const void* _src, size_t srcSize) = 0;
-			virtual int Read(void* _dest, size_t destSize) = 0;
 
-		public:
-			CoreZero::Event<OnDataReceived> DataReceived;
 		};
 	}
 }
 
-#endif	// !COREZERO_PDK_COM_H_
+#endif	// !CZSYSTEM_WATCHDOG_H__

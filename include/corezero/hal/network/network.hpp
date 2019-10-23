@@ -1,5 +1,5 @@
 /******************************************************************************
-*	\file		CZSystem.Network.hpp
+*	\file		network.hpp
 *	\author		Jensen Miller
 *	\date		Jul 15, 2018
 *
@@ -41,23 +41,24 @@ constexpr int NETWORK_SUPPORTS_SSL = 0x1;
 
 #include <corezero/network/network_def.hpp>
 
-namespace CZSystem
+namespace czsystem
 {	
-	namespace Network
+	namespace network
 	{
 		using corezero::network::IPv4_Address;
 		using corezero::network::PingSummary;
 		using OnDataReceived = corezero::Delegate<void(void*,size_t)>;
 
 		/**
-		 *	\brief Network adapter interface.
+		 *	\interface Network adapter interface.
 		 */
 		class I_NetworkAdapter
 		{
 		//
 		//	Methods
 		//
-		public:
+		public:		
+
 			virtual PingSummary	Ping(const IPv4_Address& ipAddress, unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
 			virtual PingSummary	Ping(const char hostName[], unsigned int timeout = 4000, unsigned int pingNum = 4) = 0;
 

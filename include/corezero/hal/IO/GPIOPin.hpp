@@ -1,5 +1,5 @@
 /******************************************************************************
-*	\file	CZSystem.IO.GPIO_Pin.hpp
+*	\file	GPIOPin.hpp
 *	\author	Jensen Miller
 *	\date	Jun 25, 2018
 *	
@@ -23,17 +23,17 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#ifndef COREZERO_HDK_GPIOPIN_H_
-#define COREZERO_HDK_GPIOPIN_H_
+#ifndef COREZERO_IO_GPIOPIN_H_
+#define COREZERO_IO_GPIOPIN_H_
 
 #include <stdint.h>
-#include <CoreZero.Event.hpp>
+#include <corezero/event.hpp>
 
 
 
-namespace CZSystem
+namespace czsystem
 {
-	namespace IO
+	namespace io
 	{
 		//
 		//	Enumerables
@@ -65,9 +65,9 @@ namespace CZSystem
 			TriggerOnRising		///< Trigger interrupt on Risging edge of signal
 		};
 
-		class I_GPIO_Pin;
+		class I_GPIOPin;
 
-		using OnTrigger = CoreZero::Delegate<void(I_GPIO_Pin*)>;
+		using OnTrigger = corezero::Delegate<void(I_GPIOPin*)>;
 
 		/****************************************************************************
 		 *	@interface I_GpioPin GpioController.hpp "GpioController.hpp"
@@ -75,11 +75,11 @@ namespace CZSystem
 		 *
 		 *	@details Allows for cross-platform implementations of Gpio controllers
 		 */
-		class I_GPIO_Pin
+		class I_GPIOPin
 		{
 		public:
-			constexpr I_GPIO_Pin(unsigned pinNum) {}
-			virtual ~I_GPIO_Pin() {}
+			constexpr I_GPIOPin(unsigned pinNum) {}
+			virtual ~I_GPIOPin() {}
 
 		//
 		//	Methods
@@ -96,8 +96,14 @@ namespace CZSystem
 			virtual int EnableInterrupt(InterruptTrigger intTrig) = 0;
 			virtual int DisableInterrupt() = 0;
 
+
+		//
+		//	Events
+		//
 		public:
-			CoreZero::Event<OnTrigger> Triggered;
+			///	Signal raised when the pin is triggered by a
+			///	configurable trigger type (High, Low, Rising, Falling, etc.)
+			corezero::Event<OnTrigger> Triggered;
 		};
 	}
 }

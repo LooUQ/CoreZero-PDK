@@ -23,6 +23,7 @@
 *   along with CoreZero.  If not, see <https://www.gnu.org/licenses/>.
 *
 `*****************************************************************************/
+#ifdef ATMELSAM
 #ifndef ATSAM_TIMERS_TIMER_H_
 #define ATSAM_TIMERS_TIMER_H_
 
@@ -44,3 +45,4 @@ namespace atsam
 }
 
 #endif	// ! ATSAM_TIMERS_TIMER_H_
+#endif // ATMELSAM

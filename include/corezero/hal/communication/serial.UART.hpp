@@ -3,11 +3,11 @@
 
 
 
-namespace CZSystem
+namespace czsystem
 {
-	namespace Communication
+	namespace communication
 	{
-		namespace Serial
+		namespace serial
 		{
 			class I_UartDevice {};
 		}

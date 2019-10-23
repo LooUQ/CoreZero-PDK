@@ -1,12 +1,8 @@
 /******************************************************************************
-*	@file		PWM_Pin.hpp
+*	\file		timer.hpp
+*	\author		Jensen Miller	<jensen@loouq.com>
 *
-*	@author		Jensen Miller
-*	@date		Aug 22, 2019
-*
-*	Copyright (c) 2019 LooUQ Incorporated
-*
-*	@details	An interface for deriving platform specific Pwm implementations.
+*	Copyright (c) 2018 LooUQ Incorporated
 *
 *	License: The GNU Licence(GNU)
 *
@@ -26,38 +22,38 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#ifndef COREZERO_HDK_PWMPIN_H_
-#define COREZERO_HDK_PWMPIN_H_
+#ifndef CZSYSTEM_TIMER_H__
+#define CZSYSTEM_TIMER_H__
 
-#include <CZSystem.IO.GPIO_Pin.hpp>
+#include <corezero/event.hpp>
 
-
-
-namespace CZSystem
+namespace czsystem
 {
-	namespace IO
+	namespace timers
 	{
-		class I_PWM_Pin
+		using OnElapsed = corezero::Delegate<void()>;
+
+		template <typename NBIT_TIMER>
+		class I_Timer
 		{
+			using timer_val = NBIT_TIMER;
+
 		public:
-			constexpr I_PWM_Pin(unsigned pinNum) {}
-			virtual ~I_PWM_Pin() {}
+			virtual void Start() = 0;
+			virtual void Stop() = 0;
 
-			//
-			//	Methods
-			//
+			virtual void Enable() = 0;
+			virtual void Disable() = 0;
+
+			virtual void SetInterval(timer_val timeInterval) = 0;
+			virtual timer_val GetInterval() = 0;
+
 		public:
-			virtual int Open() = 0;
-			virtual int Close() = 0;
+			virtual bool IsEnabled() = 0;
+			virtual void AllowAutoReset(bool enAutoRst) = 0;
 
-			virtual int Write(float pwmValue) = 0;
-			virtual float Read() = 0;
-
-			virtual int SetPinMode(DriveMode driveMode) = 0;
+		public:
+			corezero::Event<OnElapsed> Elapsed;
 		};
-
 	}
 }
-
-
-#endif	// !COREZERO_HDK_PWMPIN_H_

@@ -1,7 +1,7 @@
 /******************************************************************************
-*	\file		CZSystem.Communication.Serial.I2C.h
+*	\file		communication.hpp
 *	\author		Jensen Miller	<jensen@loouq.com>
-*	\date		Aug 31, 2019
+*	\date		Jan 31, 2018
 *
 *	Copyright (c) 2018-2019 LooUQ Incorporated
 *
@@ -26,21 +26,29 @@
 *	License along with CoreZero.
 *	If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
-#ifndef COREZERO_PDK_I2CDEVICE_H_
-#define COREZERO_PDK_I2CDEVICE_H_
+#ifndef COREZERO_PDK_COM_H_
+#define COREZERO_PDK_COM_H_
 
+#include <stddef.h>
+#include <corezero/event.hpp>
 
-
-namespace CZSystem
+namespace czsystem
 {
-	namespace Communication
+	namespace communication
 	{
-		namespace Serial
+		class I_Communicator;
+		using OnDataReceived = corezero::Delegate<void(I_Communicator* const)>;
+
+		class I_Communicator
 		{
-			class I_I2CDevice {};
-		}
+		public:
+			virtual int Write(const void* _src, size_t srcSize) = 0;
+			virtual int Read(void* _dest, size_t destSize) = 0;
+
+		public:
+			corezero::Event<OnDataReceived> DataReceived;
+		};
 	}
 }
 
-
-#endif	// !COREZERO_PDK_I2CDEVICE_H_
+#endif	// !COREZERO_PDK_COM_H_

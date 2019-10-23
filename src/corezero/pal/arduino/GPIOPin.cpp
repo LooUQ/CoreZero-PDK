@@ -1,42 +1,41 @@
 #if defined(ARDUINO)
 
-#include "Arduino.GPIO.hpp"
-#include <Arduino.h>
+#include "../../../include/platform/arduino/GPIOPin.hpp"
 
 namespace CZSystem
 {
 	namespace IO
 	{
-		int GPIO_Pin::Open()
+		int GPIOPin::Open()
 		{
 			m_opened = true;
 			return 0;
 		}
 
-		int GPIO_Pin::Close()
+		int GPIOPin::Close()
 		{
 			m_opened = false;
 			return 0;
 		}
 
-		int GPIO_Pin::Write(LogicValue logicVal)
+		int GPIOPin::Write(LogicValue logicVal)
 		{
 			digitalWrite(m_pinName, logicVal);
 			return 0;
 		}
 
-		LogicValue GPIO_Pin::Read()
+		LogicValue GPIOPin::Read()
 		{
 			return (LogicValue)digitalRead(gpioPin);
 		}
 
-		int GPIO_Pin::SetPinMode(DriveMode driveMode)
+		int GPIOPin::SetPinMode(DriveMode driveMode)
 		{
 			pinMode(m_pinName, driveMode);
 			return 0;
 		}
 
-		int GPIO_Pin::EnableInterrupt(InterruptTrigger intTrig)
+		int GPIOPin::EnableInterrupt(InterruptTrigger intTrig)
 		{
 			if (m_eventLinker != nullptr) return;
 			m_eventLinker = CoreZero::Create_MemberDelegate(this, &interrupt_to_event);
@@ -44,7 +43,7 @@ namespace CZSystem
 			return 0;
 		}
 
-		int GPIO_Pin::DisableInterrupt()
+		int GPIOPin::DisableInterrupt()
 		{
 			if (m_eventLinker == nullptr) return;
 			detachInterrupt(m_pinName);
@@ -53,7 +52,7 @@ namespace CZSystem
 		}
 
 
-		void GPIO_Pin::interrupt_to_event()
+		void GPIOPin::interrupt_to_event()
 		{
 			Triggered(this);
 		}
